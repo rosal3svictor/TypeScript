@@ -20,6 +20,8 @@
 - [TypeScript Object Types](#typescript-object-types)
 - [TypeScript Enums](#typescript-enums)
 - [TypeScript Type Aliases and Interfaces](#typescript-type-aliases-and-interfaces)
+- [TypeScript Union Types](#typescript-union-types)
+- [TypeScript Functions](#typescript-functions)
 
 # What is TypeScript?
 
@@ -471,4 +473,129 @@ const coloredRectangle: ColoredRectangle = {
   width: 10,
   color: "red"
 };
+```
+
+# TypeScript Union Types
+
+**Union types **are used when a value can be more than a single type.
+
+Such as when a property would be `string` or `number`.
+
+## Union | (OR)
+
+Using the `|` we are saying our parameter is a `string` or `number`:
+
+```TypeScript
+function printStatusCode(code: string | number) {
+  console.log(`My status code is ${code}.`)
+}
+printStatusCode(404);
+printStatusCode('404');
+```
+
+## Union Type Errors
+
+**Note:** you need to know what your type is when union types are being used to avoid type errors:
+
+```TypeScript
+function printStatusCode(code: string | number) {
+  console.log(`My status code is ${code.toUpperCase()}.`) // error: Property 'toUpperCase' does not exist ontype 'string | number'.
+  Property 'toUpperCase' does not exist on type 'number'
+}
+```
+
+# TypeScript Functions
+
+TypeScript has a specific syntax for typing function parameters and return values.
+
+## Return Type
+
+The type of the value returned by the function can be explicitly defined.
+
+```TypeScript
+// the `: number` here specifies that this function returns a number
+function getTime(): number {
+  return new Date().getTime();
+}
+```
+
+If no return type is defined, TypeScript will attempt to infer it through the types of the variables or expressions returned.
+
+## Void Return Type
+
+The type `void` can be used to indicate a function doesn't return any value.
+
+```TypeScript
+function printHello(): void {
+  console.log('Hello!');
+}
+```
+
+## Parameters
+
+Function parameters are typed with a similar syntax as variable declarations.
+
+```TypeScript
+function multiply(a: number, b: number) {
+  return a * b;
+}
+```
+
+If no parameter type is defined, TypeScript will default to using `any`, unless additional type information is available as shown in the Default Parameters and Type Alias sections below.
+
+## Optional Parameters
+
+By default TypeScript will assume all parameters are required, but they can be explicitly marked as optional.
+
+```TypeScript
+// the `?` operator here marks parameter `c` as optional
+function add(a: number, b: number, c?: number) {
+  return a + b + (c || 0);
+}
+```
+
+## Default Parameters
+
+For parameters with default values, the default value goes after the type annotation:
+
+```TypeScript
+function pow(value: number, exponent: number = 10) {
+  return value ** exponent;
+}
+```
+
+TypeScript can also infer the type from the default value.
+
+## Named Parameters
+
+Typing named parameters follows the same pattern as typing normal parameters.
+
+```TypeScript
+function divide({ dividend, divisor }: { dividend: number, divisor: number }) {
+  return dividend / divisor;
+}
+```
+
+## Rest Parameters
+
+Rest parameters can be typed like normal parameters, but the type must be an array as rest parameters are always arrays.
+
+```TypeScript
+function add(a: number, b: number, ...rest: number[]) {
+  return a + b + rest.reduce((p, c) => p + c, 0);
+}
+```
+
+## Type Alias
+
+Function types can be specified separately from functions with type aliases.
+
+``TypeScript
+type Negate = (value: number) => number;
+
+// in this function, the parameter `value` automatically gets assigned the type `number` from the type `Negate`
+const negateFunction: Negate = (value) => value \* -1;
+
+```
+
 ```
