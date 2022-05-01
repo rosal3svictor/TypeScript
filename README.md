@@ -22,6 +22,12 @@
 - [TypeScript Type Aliases and Interfaces](#typescript-type-aliases-and-interfaces)
 - [TypeScript Union Types](#typescript-union-types)
 - [TypeScript Functions](#typescript-functions)
+- [TypeScript Casting](#typescript-casting)
+- [TypeScript Classes](#typescript-classes)
+- [TypeScript Basic Generics](#typescript-basic-generics)
+- [TypeScript Utility Types](#typescript-utility-types)
+- [TypeScript Keyof](#typescript-keyof)
+- [TypeScript Null & Undefined](#typescript-null-and-undefined)
 
 # What is TypeScript?
 
@@ -66,7 +72,7 @@ In both examples below `firstName` is of type `string`.
 
 **Explicit** - Code we add to tell TypeScript what type of value a variable will refer to. They are easier to read and more intentional.
 
-```TypeScript
+```Typescript
  let firstName: string = "Dylan";
 ```
 
@@ -78,7 +84,7 @@ In both examples below `firstName` is of type `string`.
   <img src="./assets/typeInference.png" alt="image 1"/>
 </div>
 
-```TypeScript
+```Typescript
  let firstName = "Dylan";
 ```
 
@@ -86,7 +92,7 @@ In both examples below `firstName` is of type `string`.
 
 TypeScript may not always properly infer what the type of a variable may be. In such cases, it will set the type to `any` which disables type checking.
 
-```TypeScript
+```Typescript
 // Implicit any as JSON.parse doesn't know what type of data it returns so it can be "any" thing...
 const json = JSON.parse("55");
 // Most expect json to be an object, but it can be a string or a number like this example
@@ -113,7 +119,7 @@ TypeScript has special types that may not refer to any specific type of data.
 
 The example below does not use `any` and will throw an error:
 
-```TypeScript
+```Typescript
 let u = true;
 u = "string"; // Error: Type 'string' is not assignable to type 'boolean'.
 Math.round(u); // Error: Argument of type 'boolean' is not assignable to parameter of type 'number'.
@@ -121,7 +127,7 @@ Math.round(u); // Error: Argument of type 'boolean' is not assignable to paramet
 
 Setting `any` to the special type `any` disables type checking:
 
-```TypeScript
+```Typescript
 let v: any = true;
 v = "string"; // no error as it can be "any" type
 Math.round(v); // no error as it can be "any" type
@@ -135,7 +141,7 @@ _**IMPORTANT**: any can be a useful way to get past errors since it disables typ
 
 TypeScript will prevent `unknown` types from being used, as shown in the below example:
 
-```TypeScript
+```Typescript
 let w: unknown = 1;
 w = "string"; // no error
 w = {
@@ -159,7 +165,7 @@ _IMPORTANT: unknown is best used when you don't know the type of data being type
 
 `never` effectively throws an error whenever it is defined.
 
-```TypeScript
+```Typescript
 let x: never = true; // Error: Type 'boolean' is not assignable to type 'never'.
 ```
 
@@ -169,7 +175,7 @@ _IMPORTANT: never is rarely used, especially by itself, its primary use is in ad
 
 `undefined` and `null` are types that refer to the JavaScript primitives `undefined` and `null` respectively.
 
-```TypeScript
+```Typescript
 let y: undefined = undefined;
 let z: null = null;
 ```
@@ -182,7 +188,7 @@ _IMPORTANT: These types don't have much use unless strictNullChecks is enabled i
 
 TypeScript has a specific syntax for typing arrays.
 
-```TypeScript
+```Typescript
 const names: string[] = [];
 names.push("Dylan"); // no error
 // names.push(3); // Error: Argument of type 'number' is not assignable to parameter of type 'string'.
@@ -192,7 +198,7 @@ names.push("Dylan"); // no error
 
 The `readonly` keyword can prevent arrays from being changed.
 
-```TypeScript
+```Typescript
 const names: readonly string[] = ["Dylan"];
 names.push("Jack"); // Error: Property 'push' does not exist on type 'readonly string[]'.
 // try removing the readonly modifier and see if it works?
@@ -202,7 +208,7 @@ names.push("Jack"); // Error: Property 'push' does not exist on type 'readonly s
 
 TypeScript can infer the type of an array if it has values.
 
-```TypeScript
+```Typescript
 const numbers = [1, 2, 3]; // inferred to type number[]
 numbers.push(4); // no error
 // comment line below out to see the successful assignment
@@ -218,7 +224,7 @@ Tuples are great because they allow each element in the array to be a known type
 
 To define a tuple, specify the type of each element in the array:
 
-```TypeScript
+```Typescript
 // define our tuple
 let ourTuple: [number, boolean, string];
 
@@ -228,7 +234,7 @@ ourTuple = [5, false, 'Coding God was here'];
 
 As you can see we have a number, boolean and a string. But what happens if we try to set them in the wrong order:
 
-```TypeScript
+```Typescript
 // define our tuple
 let ourTuple: [number, boolean, string];
 
@@ -244,7 +250,7 @@ A good practice is to make your **tuple** `readonly`.
 
 Tuples only have strongly defined types for the initial values:
 
-```TypeScript
+```Typescript
 // define our tuple
 let ourTuple: [number, boolean, string];
 // initialize correctly
@@ -256,7 +262,7 @@ console.log(ourTuple);
 
 You see the new valueTuples only have strongly defined types for the initial values:
 
-```TypeScript
+```Typescript
 // define our readonly tuple
 const ourReadonlyTuple: readonly [number, boolean, string] = [5, true, 'The Real Coding God'];
 // throws error as it is readonly.
@@ -275,7 +281,7 @@ Because of the structure we know our first value in our list will be a certain v
 
 TypeScript has a specific syntax for typing objects.
 
-```TypeScript
+```Typescript
 const car: { type: string, model: string, year: number } = {
   type: "Toyota",
   model: "Corolla",
@@ -287,7 +293,7 @@ const car: { type: string, model: string, year: number } = {
 
 TypeScript can infer the types of properties based on their values.
 
-```TypeScript
+```Typescript
 const car = {
   type: "Toyota",
 };
@@ -301,7 +307,7 @@ Object properties are properties that don't have to be defined in the object def
 
 _Example without an optional property_
 
-```TypeScript
+```Typescript
 const car: { type: string, mileage: number } = { // Error: Property 'mileage' is missing in type '{ type: string; }' but required in type '{ type: string; mileage: number; }'.
   type: "Toyota",
 };
@@ -310,7 +316,7 @@ car.mileage = 2000;
 
 _Example with an optional property_
 
-```TypeScript
+```Typescript
 const car: { type: string, mileage?: number } = { // no error
   type: "Toyota"
 };
@@ -321,7 +327,7 @@ car.mileage = 2000;
 
 Index signatures can be used for objects without a defined list of properties.
 
-```TypeScript
+```Typescript
 const nameAgeMap: { [index: string]: number } = {};
 nameAgeMap.Jack = 25; // no error
 nameAgeMap.Mark = "Fifty"; // Error: Type 'string' is not assignable to type 'number'.
@@ -339,7 +345,7 @@ Enums come in two flavors `string` and `numeric`. Lets start with numeric.
 
 By default, enums will initialize the first value to `0` and add 1 to each additional value:
 
-```TypeScript
+```Typescript
 enum CardinalDirections {
   North,
   East,
@@ -357,7 +363,7 @@ currentDirection = 'North'; // Error: "North" is not assignable to type 'Cardina
 
 You can set the value of the first numeric enum and have it auto increment from that:
 
-```TypeScript
+```Typescript
 enum CardinalDirections {
   North = 1,
   East,
@@ -374,7 +380,7 @@ console.log(CardinalDirections.West);
 
 You can assign unique number values for each enum value. Then the values will not incremented automatically:
 
-```TypeScript
+```Typescript
 enum StatusCodes {
   NotFound = 404,
   Success = 200,
@@ -391,7 +397,7 @@ console.log(StatusCodes.Success);
 
 Enums can also contain `strings`. This is more common than numeric enums, because of their readability and intent.
 
-```TypeScript
+```Typescript
 enum CardinalDirections {
   North = 'North',
   East = "East",
@@ -416,7 +422,7 @@ Type Aliases allow defining types with a custom name (an Alias).
 
 Type Aliases can be used for primitives like string or more complex types such as `objects` and `arrays`:
 
-```TypeScript
+```Typescript
 type CarYear = number
 type CarType = string
 type CarModel = string
@@ -440,7 +446,7 @@ const car: Car = {
 
 Interfaces are similar to type aliases, except they **only** apply to `object` types.
 
-```TypeScript
+```Typescript
 interface Rectangle {
   height: number,
   width: number
@@ -458,7 +464,7 @@ Interfaces can extend each other's definition.
 
 **Extending** an interface means you are creating a new interface with the same properties as the original, plus something new.
 
-```TypeScript
+```Typescript
 interface Rectangle {
   height: number,
   width: number
@@ -485,7 +491,7 @@ Such as when a property would be `string` or `number`.
 
 Using the `|` we are saying our parameter is a `string` or `number`:
 
-```TypeScript
+```Typescript
 function printStatusCode(code: string | number) {
   console.log(`My status code is ${code}.`)
 }
@@ -497,7 +503,7 @@ printStatusCode('404');
 
 **Note:** you need to know what your type is when union types are being used to avoid type errors:
 
-```TypeScript
+```Typescript
 function printStatusCode(code: string | number) {
   console.log(`My status code is ${code.toUpperCase()}.`) // error: Property 'toUpperCase' does not exist ontype 'string | number'.
   Property 'toUpperCase' does not exist on type 'number'
@@ -512,7 +518,7 @@ TypeScript has a specific syntax for typing function parameters and return value
 
 The type of the value returned by the function can be explicitly defined.
 
-```TypeScript
+```Typescript
 // the `: number` here specifies that this function returns a number
 function getTime(): number {
   return new Date().getTime();
@@ -525,7 +531,7 @@ If no return type is defined, TypeScript will attempt to infer it through the ty
 
 The type `void` can be used to indicate a function doesn't return any value.
 
-```TypeScript
+```Typescript
 function printHello(): void {
   console.log('Hello!');
 }
@@ -535,7 +541,7 @@ function printHello(): void {
 
 Function parameters are typed with a similar syntax as variable declarations.
 
-```TypeScript
+```Typescript
 function multiply(a: number, b: number) {
   return a * b;
 }
@@ -547,7 +553,7 @@ If no parameter type is defined, TypeScript will default to using `any`, unless 
 
 By default TypeScript will assume all parameters are required, but they can be explicitly marked as optional.
 
-```TypeScript
+```Typescript
 // the `?` operator here marks parameter `c` as optional
 function add(a: number, b: number, c?: number) {
   return a + b + (c || 0);
@@ -558,7 +564,7 @@ function add(a: number, b: number, c?: number) {
 
 For parameters with default values, the default value goes after the type annotation:
 
-```TypeScript
+```Typescript
 function pow(value: number, exponent: number = 10) {
   return value ** exponent;
 }
@@ -570,7 +576,7 @@ TypeScript can also infer the type from the default value.
 
 Typing named parameters follows the same pattern as typing normal parameters.
 
-```TypeScript
+```Typescript
 function divide({ dividend, divisor }: { dividend: number, divisor: number }) {
   return dividend / divisor;
 }
@@ -580,7 +586,7 @@ function divide({ dividend, divisor }: { dividend: number, divisor: number }) {
 
 Rest parameters can be typed like normal parameters, but the type must be an array as rest parameters are always arrays.
 
-```TypeScript
+```Typescript
 function add(a: number, b: number, ...rest: number[]) {
   return a + b + rest.reduce((p, c) => p + c, 0);
 }
@@ -590,12 +596,597 @@ function add(a: number, b: number, ...rest: number[]) {
 
 Function types can be specified separately from functions with type aliases.
 
-``TypeScript
+```Typescript
 type Negate = (value: number) => number;
 
 // in this function, the parameter `value` automatically gets assigned the type `number` from the type `Negate`
-const negateFunction: Negate = (value) => value \* -1;
+const negateFunction: Negate = (value) => value * -1;
+```
+
+# TypeScript Casting
+
+There are times when working with types where it's necessary to override the type of a variable, such as when incorrect types are provided by a library.
+
+Casting is the process of overriding a type.
+
+## Casting with as
+
+A straightforward way to cast a variable is using the `as` keyword, which will directly change the type of the given variable.
+
+```Typescript
+let x: unknown = 'hello';
+console.log((x as string).length);
+```
+
+Casting doesn't actually change the type of the data within the variable, for example the following code with not work as expected since the variable x is still holds a number.
+
+```Typescript
+let x: unknown = 4;
+console.log((x as string).length); // prints undefined since numbers don't have a length
+```
+
+TypeScript will still attempt to typecheck casts to prevent casts that don't seem correct, for example the following will throw a type error since TypeScript knows casting a string to a number doesn't makes sense without converting the data:
+
+```Typescript
+console.log((4 as string).length); // Error: Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+```
+
+The Force casting section below covers how to override this.
+
+## Casting with <>
+
+Using <> works the same as casting with `as`.
+
+```Typescript
+let x: unknown = 'hello';
+console.log((<string>x).length);
+```
+
+This type of casting will not work with TSX, such as when working on React files.
+
+## Force casting
+
+To override type errors that TypeScript may throw when casting, first cast to `unknown`, then to the target type.
+
+```Typescript
+let x = 'hello';
+console.log(((x as unknown) as number).length); // x is not actually a number so this will return undefined
+```
+
+# TypeScript Classes
+
+TypeScript adds types and visibility modifiers to JavaScript classes.
+
+## Members: Types
+
+The members of a class (properties & methods) are typed using type annotations, similar to variables.
+
+```Typescript
+class Person {
+  name: string;
+}
+
+const person = new Person();
+person.name = "Jane";
+```
+
+## Members: Visibility
+
+Class members also be given special modifiers which affect visibility.
+
+There are three main visibility modifiers in TypeScript:
+
+    public - (default) allows access to the class member from anywhere
+    private - only allows access to the class member from within the class
+    protected - allows access to the class member from itself and any classes that inherit it, which is covered in the inheritance section below
+
+```Typescript
+class Person {
+  private name: string;
+
+  public constructor(name: string) {
+    this.name = name;
+  }
+
+  public getName(): string {
+    return this.name;
+  }
+}
+
+const person = new Person("Jane");
+console.log(person.getName()); // person.name isn't accessible from outside the class since it's private
+```
+
+The `this` keyword in a class usually refers to the instance of the class.
+
+## Parameter Properties
+
+TypeScript provides a convenient way to define class members in the constructor, by adding a visibility modifiers to the parameter.
+
+```Typescript
+class Person {
+  // name is a private member variable
+  public constructor(private name: string) {}
+
+  public getName(): string {
+    return this.name;
+  }
+}
+
+const person = new Person("Jane");
+console.log(person.getName());
+```
+
+## Readonly
+
+Similar to arrays, the `readonly` keyword can prevent class members from being changed.
+
+```Typescript
+class Person {
+  private readonly name: string;
+
+  public constructor(name: string) {
+    // name cannot be changed after this initial definition, which has to be either at it's declaration or in the constructor.
+    this.name = name;
+  }
+
+  public getName(): string {
+    return this.name;
+  }
+}
+
+const person = new Person("Jane");
+console.log(person.getName());
+```
+
+## Inheritance: Implements
+
+Interfaces (covered here) can be used to define the type a class must follow through the `implements` keyword.
+
+```Typescript
+interface Shape {
+  getArea: () => number;
+}
+
+class Rectangle implements Shape {
+  public constructor(protected readonly width: number, protected readonly height: number) {}
+
+  public getArea(): number {
+    return this.width * this.height;
+  }
+}
+```
+
+A class can implement multiple interfaces by listing each one after `implements`, separated by a comma like so: `class Rectangle implements Shape, Color`
+
+## Inheritance: Extends
+
+Classes can extend each other through the `extends` keyword. A class can only extends one other class.
+
+```Typescript
+interface Shape {
+  getArea: () => number;
+}
+
+class Rectangle implements Shape {
+  public constructor(protected readonly width: number, protected readonly height: number) {}
+
+  public getArea(): number {
+    return this.width * this.height;
+  }
+}
+
+class Square extends Rectangle {
+  public constructor(width: number) {
+    super(width, width);
+  }
+
+  // getArea gets inherited from Rectangle
+}
+```
+
+## Override
+
+When a class extends another class, it can replace the members of the parent class with the same name.
+
+Newer versions of TypeScript allow explicitly marking this with the `override` keyword.
+
+```Typescript
+interface Shape {
+  getArea: () => number;
+}
+
+class Rectangle implements Shape {
+  // using protected for these members allows access from classes that extend from this class, such as Square
+  public constructor(protected readonly width: number, protected readonly height: number) {}
+
+  public getArea(): number {
+    return this.width * this.height;
+  }
+
+  public toString(): string {
+    return `Rectangle[width=${this.width}, height=${this.height}]`;
+  }
+}
+
+class Square extends Rectangle {
+  public constructor(width: number) {
+    super(width, width);
+  }
+
+  // this toString replaces the toString from Rectangle
+  public override toString(): string {
+    return `Square[width=${this.width}]`;
+  }
+}
+```
+
+By default the `override` keyword is optional when overriding a method, and only helps to prevent accidentally overriding a method that does not exist. Use the setting `noImplicitOverride` to force it to be used when overriding.
+
+## Abstract Classes
+
+Classes can be written in a way that allows them to be used as a base class for other classes without having to implement all the members. This is done by using the `abstract` keyword. Members that are left unimplemented also use the `abstract` keyword.
+
+```Typescript
+abstract class Polygon {
+  public abstract getArea(): number;
+
+  public toString(): string {
+    return `Polygon[area=${this.getArea()}]`;
+  }
+}
+
+class Rectangle extends Polygon {
+  public constructor(protected readonly width: number, protected readonly height: number) {
+    super();
+  }
+
+  public getArea(): number {
+    return this.width * this.height;
+  }
+}
+```
+
+Abstract classes cannot be directly instantiated, as they do not have all their members implemented.
+
+# TypeScript Basic Generics
+
+Generics allow creating 'type variables' which can be used to create classes, functions & type aliases that don't need to explicitly define the types that they use.
+
+Generics makes it easier to write reusable code.
+
+## Functions
+
+Generics with functions help make more generalized methods which more accurately represent the types used and returned.
+
+```Typescript
+ function createPair<S, T>(v1: S, v2: T): [S, T] {
+  return [v1, v2];
+}
+console.log(createPair<string, number>('hello', 42)); // ['hello', 42]
 
 ```
 
+TypeScript can also infer the type of the generic parameter from the function parameters.
+
+## Classes
+
+Generics can be used to create generalized classes, like Map.
+
+```Typescript
+class NamedValue<T> {
+  private _value: T | undefined;
+
+  constructor(private name: string) {}
+
+  public setValue(value: T) {
+    this._value = value;
+  }
+
+  public getValue(): T | undefined {
+    return this._value;
+  }
+
+  public toString(): string {
+    return `${this.name}: ${this._value}`;
+  }
+}
+
+let value = new NamedValue<number>('myNumber');
+value.setValue(10);
+console.log(value.toString()); // myNumber: 10
+```
+
+TypeScript can also infer the type of the generic parameter if it's used in a constructor parameter.
+
+## Type Aliases
+
+Generics in type aliases allow creating types that are more reusable.
+
+```Typescript
+type Wrapped<T> = { value: T };
+
+const wrappedValue: Wrapped<number> = { value: 10 };
+```
+
+This also works with interfaces with the following syntax: `interface Wrapped<T> {`
+
+## Default Value
+
+Generics can be assigned default values which apply if no other value is specified or inferred.
+
+```Typescript
+class NamedValue<T = string> {
+  private _value: T | undefined;
+
+  constructor(private name: string) {}
+
+  public setValue(value: T) {
+    this._value = value;
+  }
+
+  public getValue(): T | undefined {
+    return this._value;
+  }
+
+  public toString(): string {
+    return `${this.name}: ${this._value}`;
+  }
+}
+
+let value = new NamedValue('myNumber');
+value.setValue('myValue');
+console.log(value.toString()); // myNumber: myValue
+```
+
+## Extends
+
+Constraints can be added to generics to limit what's allowed. The constraints make it possible to rely on a more specific type when using the generic type.
+
+```Typescript
+function createLoggedPair<S extends string | number, T extends string | number>(v1: S, v2: T): [S, T] {
+  console.log(`creating pair: v1='${v1}', v2='${v2}'`);
+  return [v1, v2];
+}
+```
+
+This can be combined with a default value.
+
+# TypeScript Utility Types
+
+TypeScript comes with a large number of types that can help with some common type manipulation, usually referred to as utility types.
+
+This chapter covers the most popular utility types.
+
+## Partial
+
+`Partial` changes all the properties in an object to be optional.
+
+```Typescript
+interface Point {
+  x: number;
+  y: number;
+}
+
+let pointPart: Partial<Point> = {}; // `Partial` allows x and y to be optional
+pointPart.x = 10;
+```
+
+## Required
+
+`Required` changes all the properties in an object to be required.
+
+```Typescript
+interface Car {
+  make: string;
+  model: string;
+  mileage?: number;
+}
+
+let myCar: Required<Car> = {
+  make: 'Ford',
+  model: 'Focus',
+  mileage: 12000 // `Required` forces mileage to be defined
+};
+```
+
+## Record
+
+`Record` is a shortcut to defining an objec type with a specific key type and value type.
+
+```Typescript
+const nameAgeMap: Record<string, number> = {
+  'Alice': 21,
+  'Bob': 25
+};
+```
+
+`Record<string, number>` is equivalent to `{ [key: string]: number }`
+
+## Omit
+
+`Omit` removes keys from an object type.
+
+```Typescript
+interface Person {
+  name: string;
+  age: number;
+  location?: string;
+}
+
+const bob: Omit<Person, 'age' | 'location'> = {
+  name: 'Bob'
+  // `Omit` has removed age and location from the type and they can't be defined here
+};
+```
+
+## Pick
+
+`Pick` removes all but the specified keys from an object type.
+
+```Typescript
+interface Person {
+  name: string;
+  age: number;
+  location?: string;
+}
+
+const bob: Pick<Person, 'name'> = {
+  name: 'Bob'
+  // `Pick` has only kept name, so age and location were removed from the type and they can't be defined here
+};
+```
+
+## Exclude
+
+`Exclude` removes types from a union.
+
+```Typescript
+type Primitive = string | number | boolean
+const value: Exclude<Primitive, string> = true; // a string cannot be used here since Exclude removed it from the type.
+```
+
+## ReturnType
+
+`ReturnType` extracts the return type of a function type.
+
+```Typescript
+ type PointGenerator = () => { x: number; y: number; };
+const point: ReturnType<PointGenerator> = {
+  x: 10,
+  y: 20
+};
+```
+
+## Parameters
+
+`Parameters` extracts the parameter types of a function type as an array.
+
+```Typescript
+type PointPrinter = (p: { x: number; y: number; }) => void;
+const point: Parameters<PointPrinter>[0] = {
+  x: 10,
+  y: 20
+};
+```
+
+# TypeScript Keyof
+
+`keyof` is a keyword in TypeScript which is used to extract the key type from an object type.
+
+## keyof with explicit keys
+
+When used on an object type with explicit keys, `keyof` creates a union type with those keys.
+
+```Typescript
+interface Person {
+  name: string;
+  age: number;
+}
+// `keyof Person` here creates a union type of "name" and "age", other strings will not be allowed
+function printPersonProperty(person: Person, property: keyof Person) {
+  console.log(`Printing person property ${property}: "${person[property]}"`);
+}
+let person = {
+  name: "Max",
+  age: 27
+};
+printPersonProperty(person, "name"); // Printing person property name: "Max"
+```
+
+## keyof with index signatures
+
+`keyof` can also be used with index signatures to extract the index type.
+
+```Typescript
+type StringMap = { [key: string]: unknown };
+// `keyof StringMap` resolves to `string` here
+function createStringPair(property: keyof StringMap, value: string): StringMap {
+  return { [property]: value };
+}
+```
+
+# TypeScript Null And Undefined
+
+TypeScript has a powerful system to deal with `null` or `undefined` values.
+
+By default `null` and `undefined` handling is disabled, and can be enabled by setting `strictNullChecks` to true.
+
+The rest of this page applies for when `strictNullChecks` is enabled.
+
+## Types
+
+`null` and `undefined` are primitive types and can be used like other types, such as `string`.
+
+```Typescript
+let value: string | undefined | null = null;
+value = 'hello';
+value = undefined;
+```
+
+When `strictNullChecks` is enabled, TypeScript requires values to be set unless `undefined` is explicitly added to the type.
+
+## Optional Chaining
+
+Optional Chaining is a JavaScript feature that works well with TypeScript's null handling. It allows accessing properties on an object, that may or may not exist, with a compact syntax. It can be used with the `?.` operator when accessing properties.
+
+```Typescript
+interface House {
+  sqft: number;
+  yard?: {
+    sqft: number;
+  };
+}
+function printYardSize(house: House) {
+  const yardSize = home.yard?.sqft;
+  if (yardSize === undefined) {
+    console.log('No yard');
+  } else {
+    console.log(`Yard is ${yardSize} sqft`);
+  }
+}
+
+let home: House = {
+  sqft: 500,
+};
+
+printYardSize(home); // Prints 'No yard'
+```
+
+## Nullish Coalescence
+
+Nullish Coalescence is another JavaScript feature that also works well with TypeScript's null handling. It allows writing expressions that have a fallback specifically when dealing with `null` or `undefined`. This is useful when other falsy values can occur in the expression but are still valid. It can be used with the `??` operator in an expression, similar to using the `&&` operator.
+
+```Typescript
+function printMileage(mileage: number | null | undefined) {
+  console.log(`Mileage: ${mileage ?? 'Not Available'}`);
+}
+
+printMileage(null); // Prints 'Mileage: Not Available'
+printMileage(0); // Prints 'Mileage: 0'
+```
+
+## Null Assertion
+
+TypeScript's inference system isn't perfect, there are times when it makes sense to ignore a value's possibility of being `null` or `undefined`. An easy way to do this is to use casting, but TypeScript also provides the `!` operator as a convenient shortcut.
+
+```Typescript
+function getValue(): string | undefined {
+  return 'hello';
+}
+let value = getValue();
+console.log('value length: ' + value!.length);
+```
+
+Just like casting, this can be unsafe and should be used with care.
+
+## Array bounds handling
+
+Even with `strictNullChecks` enabled, by default TypeScript will assume array access will never return undefined (unless undefined is part of the array type).
+
+The config `noUncheckedIndexedAccess` can be used to change this behavior.
+
+```Typescript
+let array: number[] = [1, 2, 3];
+let value = array[0]; // with `noUncheckedIndexedAccess` this has the type `number | undefined`
 ```
