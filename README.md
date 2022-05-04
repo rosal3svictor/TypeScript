@@ -31,9 +31,7 @@
 
 # What is TypeScript?
 
-TypeScript is a free and open-source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript, which means that TypeScript adds syntax on top of it, allowing developers to work with the type system it provides.
-
-A common way to use TypeScript is to use the official TypeScript compiler, which compiles TypeScript to readable, standards-based JavaScript.
+TypeScript is a free and open-source, strict syntactical superset of JavaScript programming language developed and maintained by Microsoft.
 
 # Why do we care about types?
 
@@ -42,15 +40,13 @@ A common way to use TypeScript is to use the official TypeScript compiler, which
 
 # Why should I use TypeScript?
 
-JavaScript is a loosely typed language. It can be difficult to understand what types of data are being passed around in JavaScript.
-
-Due to this downside of JavaScript, TypeScript:
+JavaScript is a loosely and dynamically typed language. Due to this downside of JavaScript, TypeScript is very usefeul because:
 
 1. Simplifies JavaScript code, making it easier to read, understand, maintain and debug.
 2. Uses compile time type checking. Which means it checks if the specified types match **before** running the code, not **while** running the code.
 3. It helps in code structuring.
-4. Adds type support to JavaScript. The type system of TypeScript is relatively rich and includes: interfaces, enums, hybrid types, generics, union and intersection types, access modifiers and much more. TypeScript makes typing a bit easier and a lot less explicit by the usage of type inference.
-5. TypeScript supports new ECMAScript standards and compiles them to (older) ECMAScript targets of your choosing. This means that you can use features of ES2015 and beyond, like modules, lambda functions, classes, the spread operator, destructuring, today.
+4. Adds type support to JavaScript, and makes typing a bit easier and a lot less explicit by the usage of type inference. The type system of TypeScript is relatively rich and includes: interfaces, enums, hybrid types, generics, union and intersection types, access modifiers and much more.
+5. TypeScript supports new ECMAScript standards and can also compile them to (older) ECMAScript targets of your choosing. This means that you can use features of ES2015 and beyond, like modules, lambda functions, classes, the spread operator, destructuring, today.
 
 # TypeScript Simple Types
 
