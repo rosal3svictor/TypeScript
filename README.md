@@ -12,6 +12,7 @@
 - [What is TypeScript?](#what-is-typescript)
 - [Why do we care about types?](#why-do-we-care-about-types)
 - [Why should I use TypeScript](#why-should-i-use-typescript)
+- [TypeScript Basics & Basic Types](#typescript-basics-and-basic-types)
 - [TypeScript Simple Types](#typescript-simple-types)
 - [Type Assignment](#type-assignment)
 - [TypeScript Special Types](#typesctip-special-types)
@@ -28,6 +29,7 @@
 - [TypeScript Utility Types](#typescript-utility-types)
 - [TypeScript Keyof](#typescript-keyof)
 - [TypeScript Null & Undefined](#typescript-null-and-undefined)
+- [Instance Method Modifiers](#instance-method-modifiers)
 
 # What is TypeScript?
 
@@ -42,11 +44,26 @@ TypeScript is a **_free and open-source_** programming language developed and ma
 
 JavaScript is a loosely and dynamically typed language. Due to this downside of JavaScript, TypeScript is very usefeul because:
 
-1. Simplifies JavaScript code, making it easier to read, understand, maintain and debug.
+1. Simplifies JavaScript code, making it easier to read, understand, maintain and debug, while doing it in a clean way.
 2. Uses compile time type checking. Which means it checks if the specified types match **before** running the code, not **while** running the code.
 3. It helps in code structuring.
 4. Adds type support to JavaScript, and makes typing a bit easier and a lot less explicit by the usage of type inference. The type system of TypeScript is relatively rich and includes: interfaces, enums, hybrid types, generics, union and intersection types, access modifiers and much more.
 5. TypeScript supports new ECMAScript standards and can also compile them to (older) ECMAScript targets of your choosing. This means that you can use features of ES2015 and beyond, like modules, lambda functions, classes, the spread operator, destructuring, today.
+
+# TypeScript Basics And Basic Types
+
+<div aign="center">
+  <img src="./assets/types.png" alt="image 0"/>
+</div>
+
+1. **boolean**: Used to define logic values (_true_ or _false_).
+2. **number**: They represent _whole numbers_ and _floating point_ values.
+3. **string**: It represents _text values_ like "TypeScript Rocks".
+4. **object**: It's a collection of _named values_ which are called _properties_ written as **key : value** pairs. The values can be scalar values or functions or even array of other objects.
+5. **array**: It's a homogenous collection of values. In other words, an array is a collection of values of the same data type. It is a user defined type.
+6. **tuple**: It represents a heterogeneous collection of values. It's a typed array with a pre-defined length and types for each index.
+7. **enums**: They allow to define a set of _named constants_. Using enums can make it easier to create a set of distinct cases. TypeScript provides both numeric and string-based enums.
+8. **any**: Allows you to assign a value of any type to a variable.
 
 # TypeScript Simple Types
 
@@ -1186,3 +1203,13 @@ The config `noUncheckedIndexedAccess` can be used to change this behavior.
 let array: number[] = [1, 2, 3];
 let value = array[0]; // with `noUncheckedIndexedAccess` this has the type `number | undefined`
 ```
+
+# Instance Method Modifiers
+
+**Modifiers** are keywords that we can place on different methods and properties inside of a class. The different options are _private_, _public_, and _protected_; the goal of them is to restric access to different functions or variables.
+
+By default, every property or method we add to a class will have the _public_ modifier on it. Now, what do they mean?
+
+1. **Public**: This method can be called any where, any time.
+2. **Private**: This method _can only be called by other methods_ in the _exact same_ class definition.
+3. **Protected**: This method can be called by other methods in _this_ class, or by other methods in child classes.
