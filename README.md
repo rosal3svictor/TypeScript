@@ -13,7 +13,6 @@
 - [Why do we care about types?](#why-do-we-care-about-types)
 - [Why should I use TypeScript](#why-should-i-use-typescript)
 - [TypeScript Basics & Basic Types](#typescript-basics-and-basic-types)
-- [TypeScript Simple Types](#typescript-simple-types)
 - [Type Assignment](#type-assignment)
 - [TypeScript Special Types](#typesctip-special-types)
 - [TypeScript Arrays](#typescript-array)
@@ -39,6 +38,7 @@ TypeScript is a **_free and open-source_** programming language developed and ma
 
 1. Types are used by the TypeScript Compiler to analyze our code for errors.
 2. Types allow other engineers to understand what values are flowing around our codebase.
+3. They add an extra _sanity check_ during developing.
 
 # Why should I use TypeScript?
 
@@ -64,16 +64,6 @@ JavaScript is a loosely and dynamically typed language. Due to this downside of 
 6. **tuple**: It represents a heterogeneous collection of values. It's a typed array with a pre-defined length and types for each index.
 7. **enums**: They allow to define a set of _named constants_. Using enums can make it easier to create a set of distinct cases. TypeScript provides both numeric and string-based enums.
 8. **any**: Allows you to assign a value of any type to a variable.
-
-# TypeScript Simple Types
-
-TypeScript supports some simple types (primitives) you may know.
-
-There are three main primitives in JavaScript and TypeScript.
-
-    boolean - true or false values
-    number - whole numbers and floating point values
-    string - text values like "TypeScript Rocks"
 
 # Type Assignment
 
@@ -496,7 +486,7 @@ const coloredRectangle: ColoredRectangle = {
 
 # TypeScript Union Types
 
-**Union types **are used when a value can be more than a single type.
+**Union types** are used when a value can be more than a single type.
 
 Such as when a property would be `string` or `number`.
 
