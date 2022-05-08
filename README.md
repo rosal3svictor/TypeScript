@@ -13,6 +13,7 @@
 - [Why do we care about types?](#why-do-we-care-about-types)
 - [Why should I use TypeScript](#why-should-i-use-typescript)
 - [TypeScript Basics & Basic Types](#typescript-basics-and-basic-types)
+- [Literal Types](#literal-types)
 - [Type Assignment](#type-assignment)
 - [TypeScript Special Types](#typesctip-special-types)
 - [TypeScript Arrays](#typescript-array)
@@ -64,6 +65,30 @@ JavaScript is a loosely and dynamically typed language. Due to this downside of 
 6. **tuple**: It represents a heterogeneous collection of values. It's a typed array with a pre-defined length and types for each index.
 7. **enums**: They allow to define a set of _named constants_. Using enums can make it easier to create a set of distinct cases. TypeScript provides both numeric and string-based enums.
 8. **any**: Allows you to assign a value of any type to a variable.
+
+# Literal Types
+
+A literal is a more concrete sub-type of a collective type. What this means is that `"Hello World"` is a _string_, but a _string_ is not `"Hello World"` inside the type system.
+
+There are three sets of literal types available in TypeScript today: strings, numbers, and booleans; by using literal types you can allow an exact value which a string, number, or boolean must have.
+
+```Typescript
+// Example #1
+type Easing = "ease-in" | "ease-out" | "ease-in-out";
+
+// Example #2
+interface ValidationSuccess {
+  isValid: true;
+  reason: null;
+}
+
+interface ValidationFailure {
+  isValid: false;
+  reason: string;
+}
+
+type ValidationResult = ValidationSuccess | ValidationFailure;
+```
 
 # Type Assignment
 
@@ -163,6 +188,8 @@ if(typeof w === 'object' && w !== null) {
 Compare the example above to the previous example, with `any`.
 
 _IMPORTANT: unknown is best used when you don't know the type of data being typed. To add a type later, you'll need to cast it. Casting is when we use the "as" keyword to say property or variable is of the casted type._
+
+_**IMPORTANT**: Refer to this article to get a detailed explanation between `any` and `unknown` -> https://mariusschulz.com/blog/the-unknown-type-in-typescript_
 
 ## Type: never
 
