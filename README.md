@@ -30,6 +30,9 @@
 - [TypeScript Keyof](#typescript-keyof)
 - [TypeScript Null & Undefined](#typescript-null-and-undefined)
 - [Instance Method Modifiers](#instance-method-modifiers)
+- [TypeScript Interface](#typescript-interface)
+- [Interface VS Type Alias](#interface-vs-type-alias)
+- [Creating Types From Types](#creating-types-from-types)
 
 # What is TypeScript?
 
@@ -1230,3 +1233,15 @@ By default, every property or method we add to a class will have the _public_ mo
 1. **Public**: This method can be called any where, any time.
 2. **Private**: This method _can only be called by other methods_ in the _exact same_ class definition.
 3. **Protected**: This method can be called by other methods in _this_ class, or by other methods in child classes.
+
+# TypeScript Interface
+
+Official Docs, click [here](https://www.typescriptlang.org/docs/handbook/interfaces.html).
+
+# Interface VS Type Alias
+
+[Article #1](https://dev.to/toluagboola/type-aliases-vs-interfaces-in-typescript-3ggg)
+
+# Creating Types From Types
+
+Official Docs, click [here](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html).
