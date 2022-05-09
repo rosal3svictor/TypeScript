@@ -69,6 +69,8 @@ JavaScript is a loosely and dynamically typed language. Due to this downside of 
 7. **enums**: They allow to define a set of _named constants_. Using enums can make it easier to create a set of distinct cases. TypeScript provides both numeric and string-based enums.
 8. **any**: Allows you to assign a value of any type to a variable.
 
+Take a look at the [Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html).
+
 # Literal Types
 
 A literal is a more concrete sub-type of a collective type. What this means is that `"Hello World"` is a _string_, but a _string_ is not `"Hello World"` inside the type system.
@@ -1240,8 +1242,13 @@ Official Docs, click [here](https://www.typescriptlang.org/docs/handbook/interfa
 
 # Interface VS Type Alias
 
-[Article #1](https://dev.to/toluagboola/type-aliases-vs-interfaces-in-typescript-3ggg)
+1. [Article #1](https://dev.to/toluagboola/type-aliases-vs-interfaces-in-typescript-3ggg)
+2. [Unions and Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html)
 
 # Creating Types From Types
 
 Official Docs, click [here](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html).
+
+# Intersection Types
+
+See reference [here](https://www.typescripttutorial.net/typescript-tutorial/typescript-intersection-types/)
