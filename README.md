@@ -33,6 +33,12 @@
 - [TypeScript Interface](#typescript-interface)
 - [Interface VS Type Alias](#interface-vs-type-alias)
 - [Creating Types From Types](#creating-types-from-types)
+- [CheetSheats](#cheet-sheats)
+
+## FURTHER LEARNING
+
+- [The TypeScript release notes](https://devblogs.microsoft.com/typescript/) covers a each new features in-depth.
+- [The TypeScript handbook](https://www.typescriptlang.org/docs/handbook/) is the official documentation for TypeScript, and covers most key language features.
 
 # What is TypeScript?
 
@@ -141,6 +147,8 @@ So, when are we going to add in Type Annotations? When are we going to type them
 </div>
 
 <br />
+
+[Referece To The Official Documentation](https://www.typescriptlang.org/docs/handbook/type-inference.html)
 
 # TypeScript Special Types
 
@@ -323,6 +331,8 @@ const car: { type: string, model: string, year: number } = {
   year: 2009
 };
 ```
+
+[Reference To The Official Documentation](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
 ## Type Inference
 
@@ -533,6 +543,8 @@ function printStatusCode(code: string | number) {
 printStatusCode(404);
 printStatusCode('404');
 ```
+
+[Reference To The Official Documentation](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)
 
 ## Union Type Errors
 
@@ -1247,8 +1259,34 @@ Official Docs, click [here](https://www.typescriptlang.org/docs/handbook/interfa
 
 # Creating Types From Types
 
-Official Docs, click [here](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html).
+[Reference To The Official Documentation](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html)
 
 # Intersection Types
 
 See reference [here](https://www.typescripttutorial.net/typescript-tutorial/typescript-intersection-types/)
+
+# CheetSheats
+
+### TypeScript Classes
+
+<div align="center">
+  <img src="./assets/cheatsheets/TypeScript Classes.png" alt="TypeScript Classes" />
+</div>
+
+### TypeScript Control Flow Analysis
+
+<div align="center">
+  <img src="./assets/cheatsheets/TypeScript Control Flow Analysis.png" alt="TypeScript Control Flow Analysis" />
+</div>
+
+### TypeScript Interfaces
+
+<div align="center">
+  <img src="./assets/cheatsheets/TypeScript Interfaces.png" alt="TypeScript Interfaces" />
+</div>
+
+### TypeScript Types
+
+<div align="center">
+  <img src="./assets/cheatsheets/TypeScript Types.png" alt="TypeScript Types" />
+</div>
